@@ -20,20 +20,34 @@ def main():
     
     st.title('Combined-Cycle Power Plant Energy Prediction')
     html_temp = """
-    #<div style = 'background-color:teal;padding:10px'>
-    #<h2  style = 'color:white;text-align:center;'>Energy Predictor App </h2>
-    #</div>
+    <div style='background-color: teal; padding: 10px'>
+    <h2 style='color: white; text-align: center;'>Energy Predictor App</h2>
+    </div>
     """
-    st.markdown(html_temp,unsafe_allow_html=True)
-    temperature = st.text_input("temperature","Type Here")
-    exhaust_vacuum	= st.text_input("exhaust_vacuum","Type Here")
-    amb_pressure = st.text_input("amb_pressure","Type Here")
-    r_humidity = st.text_input("r_humidity","Type Here")
+    st.markdown(html_temp, unsafe_allow_html=True)
+    
+    temperature = st.text_input("Temperature", "Type Here")
+    exhaust_vacuum = st.text_input("Exhaust Vacuum", "Type Here")
+    amb_pressure = st.text_input("Ambient Pressure", "Type Here")
+    r_humidity = st.text_input("Relative Humidity", "Type Here")
+    
     result = ""
+    
     if st.button("Predict"):
-        result = predict_energy_production(temperature,exhaust_vacuum,amb_pressure,r_humidity)
-    st.success('The output is{}'. format(result))
+        temperature = float(temperature)
+        exhaust_vacuum = float(exhaust_vacuum)
+        amb_pressure = float(amb_pressure)
+        r_humidity = float(r_humidity)
+        result = predict_energy_production(temperature, exhaust_vacuum, amb_pressure, r_humidity)
+        result = round(result[0], 2) if isinstance(result, np.ndarray) else result
+        
+    st.success('The predicted energy production is {}'.format(result))
 
 
 if __name__ == '__main__':
     main()
+    
+    
+    
+    
+    

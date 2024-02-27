@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pickle
 
-pickle_in = open("rf__model.pkl",'rb' )
+pickle_in = open("rf__model.pkl.gz",'rb' )
 regressor_r = pickle.load(pickle_in)
 
 def predict_energy_production(temperature,exhaust_vacuum,amb_pressure,r_humidity):
